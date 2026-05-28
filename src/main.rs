@@ -22,7 +22,10 @@ enum Commands {
         #[arg(short, long, value_parser = clap::value_parser!(Priority))]
         priority: Priority,
     },
-    List,
+    List {
+        #[arg(short, long, default_value = "all")]
+        filter: String,
+    },
     Done {
         id: u32,
     },
@@ -38,8 +41,8 @@ fn main() {
         Commands::Add { task, priority } => {
             add_todo(task, priority);
         }
-        Commands::List => {
-            list_todos();
+        Commands::List { filter } => {
+            list_todos(filter);
         },
         Commands::Done { id } => {
             mark_todo_as_completed(id);

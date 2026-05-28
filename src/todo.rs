@@ -2,7 +2,7 @@ use std::str::FromStr;
 
 use serde::{Serialize, Deserialize};
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq)]
 pub enum Priority {
     Low,
     Medium,
@@ -53,6 +53,9 @@ impl Todo {
     }
     pub fn get_title(&self) -> &str {
         &self.title
+    }
+    pub fn get_priority(&self) -> &Priority {
+        &self.priority
     }
     pub fn set_completed(&mut self, completed: bool) {
         self.completed = completed;
