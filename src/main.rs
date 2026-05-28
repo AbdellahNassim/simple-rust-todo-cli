@@ -4,7 +4,7 @@ mod service;
 
 use clap::{Parser, Subcommand};
 use service::{add_todo, list_todos, mark_todo_as_completed, delete_todo};
-
+use todo::Priority;
 #[derive(Parser)]
 #[command(name = "todo")]
 #[command(version = "1.0.0")]
@@ -19,6 +19,8 @@ struct Cli {
 enum Commands {
     Add {
         task: String,
+        #[arg(short, long, value_parser = clap::value_parser!(Priority))]
+        priority: Priority,
     },
     List,
     Done {
@@ -33,8 +35,8 @@ fn main() {
     
     let cli = Cli::parse();
     match cli.command {
-        Commands::Add { task } => {
-            add_todo(task);
+        Commands::Add { task, priority } => {
+            add_todo(task, priority);
         }
         Commands::List => {
             list_todos();
