@@ -1,8 +1,20 @@
 [
   {
     "id": 1,
-    "title": "test task",
+    "title": "Buy milk",
     "completed": false,
     "priority": "High"
+  },
+  {
+    "id": 2,
+    "title": "Walk dog",
+    "completed": false,
+    "priority": "Low"
+  },
+  {
+    "id": 3,
+    "title": "Read book",
+    "completed": false,
+    "priority": "Medium"
   }
 ]
