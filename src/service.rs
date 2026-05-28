@@ -1,15 +1,15 @@
 use crate::storage::{load_todos, save_todos};
-use crate::todo::Todo;
+use crate::todo::{Todo, Priority};
 
 fn get_next_id(todos: &Vec<Todo>) -> u32 {
     let max_id = todos.iter().map(|t| t.get_id()).max().unwrap_or(0);
     max_id + 1
 }
 
-pub fn add_todo(title: String) {
+pub fn add_todo(title: String, priority: Priority) {
     let mut todos = load_todos();
     let new_id = get_next_id(&todos);
-    let todo = Todo::new(new_id, title.clone());
+    let todo = Todo::new(new_id, title.clone(), priority);
     todos.push(todo);
     if let Err(e) = save_todos(&todos) {
         eprintln!("Error saving todos: {}", e);
