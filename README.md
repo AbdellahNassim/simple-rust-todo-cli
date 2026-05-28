@@ -20,7 +20,7 @@ A simple command-line todo manager written in Rust. Add tasks with priorities, l
 Clone the repository and build from the project root:
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/AbdellahNassim/simple-rust-todo-cli
 cd todo-cli
 cargo build --release
 ```
@@ -165,4 +165,4 @@ todo-cli/
 
 ## License
 
-This project is for learning purposes. Add a license file if you plan to publish or share it.
+This project is for learning purposes. You can use it as you please.
