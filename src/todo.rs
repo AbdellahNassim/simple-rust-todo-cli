@@ -16,6 +16,15 @@ impl Priority {
             Priority::High => "High",
         }
     }
+
+    pub fn from_str(s: &str) -> Result<Self, String> {
+        match s.to_lowercase().as_str() {
+            "low" | "l" => Ok(Priority::Low),
+            "medium" | "med" | "m" => Ok(Priority::Medium),
+            "high" | "h" => Ok(Priority::High),
+            _ => Err(format!("invalid priority '{s}'. Expected: low, medium, or high")),
+        }
+    }
 }
 
 impl FromStr for Priority {
@@ -60,4 +69,41 @@ impl Todo {
     pub fn set_completed(&mut self, completed: bool) {
         self.completed = completed;
     }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_priority_parsing() {
+        let priority = Priority::from_str("high").unwrap();
+        assert!(matches!(priority, Priority::High));
+
+        let priority = Priority::from_str("medium").unwrap();
+        assert!(matches!(priority, Priority::Medium));
+
+        let priority = Priority::from_str("low").unwrap();
+        assert!(matches!(priority, Priority::Low));
+
+        let priority = Priority::from_str("invalid").unwrap_err();
+    }
+
+    #[test]
+    fn test_todo_new() {
+        let todo = Todo::new(1, "Buy milk".to_string(), Priority::High);
+        assert_eq!(todo.get_id(), 1);
+        assert_eq!(todo.get_title(), "Buy milk");
+        assert!(matches!(todo.get_priority(), &Priority::High));
+    }
+
+    #[test]
+    fn test_todo_is_completed() {
+        let mut todo = Todo::new(1, "Buy milk".to_string(), Priority::High);
+        assert!(!todo.is_completed());
+        todo.set_completed(true);
+        assert!(todo.is_completed());
+    }
+    
+    
 }
