@@ -116,6 +116,16 @@ cargo run -- add --help
 cargo run -- list --help
 ```
 
+## Running Tests
+To run the tests for this project, use the following command:
+
+```bash
+cargo test
+```
+
+This will execute all unit and integration tests defined in the `src/` and `tests/` directories.
+
+
 ## Command reference
 
 | Command | Description |
